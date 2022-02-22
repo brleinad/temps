@@ -19,9 +19,10 @@ pub struct Forecast {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct DailyForecast {
+    dt: u32,
     humidity: u32,
     weather: Vec<Weather>,
-    rain: f32,
+    // rain: f32,
     temp: Temp,
     // feels_like: Temp TODO: just like temp but without min or max
 }

@@ -10,7 +10,8 @@ use services::*;
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
-            .service(get_location)
+            .service(locations_service)
+            .service(forecast_service)
     })
     .bind("127.0.0.1:8080")?
     .run()
