@@ -18,6 +18,7 @@ async fn main() -> std::io::Result<()> {
             .max_age(3600);
         App::new()
             .wrap(cors)
+            .service(hello)
             .service(locations_service)
             .service(forecast_service)
     })

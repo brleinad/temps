@@ -9,6 +9,12 @@ use crate::types::*;
 const API_KEY: &str = env!("OPEN_WEATHER_MAP_API_KEY", "$OPEN_WEATHER_MAP_API_KEY is not set");
 const API_BASE_URL: &str = "http://api.openweathermap.org";
 
+#[get("/")]
+pub async fn hello() -> impl Responder {
+    HttpResponse::Ok().body("Yo!")
+}
+
+
 #[get("/locations/{name}")]
 pub async fn locations_service(req: HttpRequest) -> impl Responder {
     let name: String = req.match_info().get("name").unwrap().parse().unwrap();
