@@ -6,19 +6,13 @@ use serde::Serialize;
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize, Serialize)]
-struct GeoCoding {
+struct Location {
     name: String,
-    local_names: HashMap<String, String>,
-    lat: f64,
-    lon: f64,
+    lat: f32,
+    lon: f32,
     country: String,
     state: String
 }
-
-// struct Location {
-//     longitude: f32,
-//     latitude: f32,
-// }
 
 use actix_web::{get, post, web, App, HttpRequest, HttpResponse, HttpServer, Responder};
 
@@ -32,21 +26,28 @@ async fn main() -> std::io::Result<()> {
     .run()
     .await
 }
+const API_KEY: &str = env!("OPEN_WEATHER_MAP_API_KEY", "$OPEN_WEATHER_MAP_API_KEY is not set");
+const API_URL: &str = "http://api.openweathermap.org/geo/1.0/direct?q=";
 
 #[get("/locations/{name}")]
 async fn get_location(req: HttpRequest) -> impl Responder {
     let name: String = req.match_info().get("name").unwrap().parse().unwrap();
-    HttpResponse::Ok().body(format!("Hello yo from {}!", name))
+    match find_location(name) {
+        Ok(locations) => HttpResponse::Ok().body(format!("{:#?}", locations)),
+        Err(err) => {
+            println!("{}", err);
+            HttpResponse::NotFound().body("No locations")
+        }
+    }
+
 }
 
-fn find_location(location: &str) ->  Result<(), Box<dyn std::error::Error>> {
-    const API_KEY: &str = env!("OPEN_WEATHER_MAP_API_KEY", "$OPEN_WEATHER_MAP_API_KEY is not set");
-
-    const API_URL: &str = "http://api.openweathermap.org/geo/1.0/direct?q=";
-    let request = format!("{}{}&appid={}", API_URL, location, API_KEY);
+fn find_location(location: String) ->  Result<Vec<Location>, Box<dyn std::error::Error>> {
+    let request = format!("{}{}&limit=5&appid={}", API_URL, location, API_KEY);
     println!("REQUEST: {}", request);
 
-    let resp = reqwest::blocking::get(request)?.json::<Vec<GeoCoding>>();
-    println!("{:?}", resp);
-    Ok(())
+    let locations: Vec<Location> = reqwest::blocking::get(request)?.json::<Vec<Location>>()?;
+    // println!("{:?}", geolocations);
+    Ok(locations)
 }
+
