@@ -3,6 +3,8 @@ use std::vec::Vec;
 
 use reqwest;
 use actix_web::{get, HttpRequest, HttpResponse, Responder};
+// use futures::future::{ready, Ready};
+use serde_json;
 
 use crate::types::*;
 
@@ -19,13 +21,19 @@ pub async fn hello() -> impl Responder {
 pub async fn locations_service(req: HttpRequest) -> impl Responder {
     let name: String = req.match_info().get("name").unwrap().parse().unwrap();
     match find_location(name) {
-        Ok(locations) => HttpResponse::Ok().body(format!("{:#?}", locations)),
+        Ok(locations) => {
+            let body = serde_json::to_string(&locations).unwrap();
+            HttpResponse::Ok()
+                .content_type("application/json")
+                .body(body)
+        },
         Err(err) => {
             println!("{}", err);
             HttpResponse::NotFound().body("No locations")
         }
     }
 }
+
 
 fn find_location(location_name: String) ->  Result<Vec<Location>, Box<dyn std::error::Error>> {
     let request: String = format!("{}/geo/1.0/direct?q={}&limit=5&appid={}", API_BASE_URL, location_name, API_KEY);
@@ -35,6 +43,7 @@ fn find_location(location_name: String) ->  Result<Vec<Location>, Box<dyn std::e
     // println!("{:?}", geolocations);
     Ok(locations)
 }
+
 
 #[get("/forecast/{lat},{lon}")]
 pub async fn forecast_service(req: HttpRequest) -> impl Responder {
@@ -50,6 +59,7 @@ pub async fn forecast_service(req: HttpRequest) -> impl Responder {
         }
     }
 }
+
 
 fn get_forecast(latitude: f32, longitude: f32) -> Result<Forecast, Box<dyn std::error::Error>> {
     let excludes = "current,minutely,hourly,alerts"; // all but daily
