@@ -24,7 +24,7 @@ const forecasts = [
     dayForecasts: [
       {
         dt: 1645527600,
-        icon: '',
+        icon: '01d',
         aveTemp: 15,
         minTemp: 10,
         maxTemp: 22,
@@ -33,7 +33,7 @@ const forecasts = [
       },
       {
         dt: 1645527600,
-        icon: '',
+        icon: '02d',
         aveTemp: 15,
         minTemp: 10,
         maxTemp: 22,
@@ -42,16 +42,69 @@ const forecasts = [
       },
       {
         dt: 1645527600,
-        icon: '',
+        icon: '02d',
         aveTemp: 15,
         minTemp: 10,
         maxTemp: 22,
         humidity: 30,
         precipitation: 2,
       },
-    ]
+      {
+        dt: 1645527600,
+        icon: '02d',
+        aveTemp: 15,
+        minTemp: 10,
+        maxTemp: 22,
+        humidity: 30,
+        precipitation: 2,
+      },
+    ],
   },
-]
+  {
+    name: 'Kamou',
+    latitude: 12.1313,
+    longitude: 12.12313,
+    dayForecasts: [
+      {
+        dt: 1645527600,
+        icon: '03d',
+        aveTemp: 15,
+        minTemp: 10,
+        maxTemp: 22,
+        humidity: 30,
+        precipitation: 2,
+      },
+      {
+        dt: 1645527600,
+        icon: '03d',
+        aveTemp: 15,
+        minTemp: 10,
+        maxTemp: 22,
+        humidity: 30,
+        precipitation: 2,
+      },
+      {
+        dt: 1645527600,
+        icon: '04d',
+        aveTemp: 15,
+        minTemp: 10,
+        maxTemp: 22,
+        humidity: 30,
+        precipitation: 2,
+      },
+      {
+        dt: 1645527600,
+        icon: '03d',
+        aveTemp: 15,
+        minTemp: 10,
+        maxTemp: 22,
+        humidity: 30,
+        precipitation: 2,
+      },
+    ],
+  },
+];
+
 export default {
   name: 'ForecastsDisplay',
   components: {LocationForecast},
