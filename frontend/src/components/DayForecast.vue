@@ -1,7 +1,7 @@
 <template>
   <div class="flex-1 flex flex-col p-4">
     <h3 class="mt-3 text-gray-900 text-sm font-medium">{{ day }}</h3>
-    <img class="w-32 h-32 flex-shrink-0 mx-auto rounded-full" :src="iconUrl" alt="" />
+    <img class="flex-shrink-0 mx-auto rounded-full" :src="iconUrl" alt="" />
     <span class="text-gray-500 text-sm">{{ dayForecast.aveTemp }}</span>
   </div>
 <!--      <div>-->

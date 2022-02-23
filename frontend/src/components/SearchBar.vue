@@ -1,5 +1,4 @@
 <template>
-gT
 </template>
 
 <script>
