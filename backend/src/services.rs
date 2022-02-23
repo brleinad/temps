@@ -52,7 +52,13 @@ pub async fn forecast_service(req: HttpRequest) -> impl Responder {
     // HttpResponse::Ok().body(format!("all good {},{}", latitude, longitude))
 
     match get_forecast(latitude, longitude) {
-        Ok(forecast) => HttpResponse::Ok().body(format!("{:#?}", forecast)),
+        // Ok(forecast) => HttpResponse::Ok().body(format!("{:#?}", forecast)),
+        Ok(forecast) => {
+            let body = serde_json::to_string(&forecast).unwrap();
+            HttpResponse::Ok()
+                .content_type("application/json")
+                .body(body)
+        },
         Err(err) => {
             println!("{}", err);
             HttpResponse::NotFound().body("Not found")
