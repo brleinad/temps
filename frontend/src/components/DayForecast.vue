@@ -1,8 +1,8 @@
 <template>
   <div class="flex-1 flex flex-col p-4">
-    <h3 class="mt-3 text-gray-900 text-sm font-medium">{{ day }}</h3>
+    <h3 class="mt-3 text-white text-sm font-medium">{{ day }}</h3>
     <img class="flex-shrink-0 mx-auto rounded-full" :src="iconUrl" alt="" />
-    <span class="text-gray-500 text-sm">{{ dayForecast.aveTemp }}</span>
+    <span class="text-slate-50 text-sm">{{ dayForecast.aveTemp }} &deg;</span>
   </div>
 <!--      <div>-->
 <!--        <div class="-mt-px flex divide-x divide-gray-200">-->
