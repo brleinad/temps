@@ -32,7 +32,8 @@ export default {
   },
   methods: {
     handleNewLocation() {
-      this.savedLocations= getSavedLocations();
+      this.savedLocations = getSavedLocations();
+      console.log(this.savedLocations)
     }
   }
 }

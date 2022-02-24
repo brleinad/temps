@@ -42,6 +42,7 @@ export default {
   },
   methods: {
     async getForecasts() {
+      this.forecasts = []; //  TODO: avoid refreshing every time
       for (const location of this.savedLocations) {
         const response = await fetch(`${this.apiUrl}/forecast/${location.lat},${location.lon}`);
         const forecast = await response.json();
