@@ -98,6 +98,12 @@ export default {
         lon: -69.86687,
         country: "CA",
       },
+      {
+        name: "Kamouraska",
+        lat: 47.566795,
+        lon: -69.86687,
+        country: "CA",
+      },
     ];
 
     for (const location of savedLocations) {

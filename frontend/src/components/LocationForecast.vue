@@ -5,7 +5,9 @@
         {{ location.name }}
       </p>
       <ul role="list" class="grid grid-cols-4 gap-3 sm:grid-cols-7">
-        <li v-for="dayForecast in location.daily.slice(0, 4)" :key="dayForecast.dt" class="col-span-1 flex flex-col text-center rounded-lg shadow divide-y divide-gray-200 bg-blue-900">
+        <li v-for="dayForecast in location.daily.slice(0, 4)" :key="dayForecast.dt"
+          class="col-span-1 flex flex-col text-center rounded-lg shadow divide-y divide-gray-200 bg-blue-900"
+        >
           <DayForecast :dayForecast="dayForecast"/>
         </li>
       </ul>
