@@ -16,6 +16,15 @@
 import SearchIcon from '../assets/SearchIcon.svg?component';
 export default {
   name: 'SearchBar',
-  components: {SearchIcon}
+  components: {SearchIcon},
+  props: {
+    apiUrl: {
+      required: true,
+      type: String,
+    }
+  },
+  mounted() {
+
+  }
 };
 </script>

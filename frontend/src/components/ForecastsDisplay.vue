@@ -7,78 +7,32 @@
         </li>
       </ul>
     </div>
-<!--    <div class="mt-6">-->
-<!--      <a href="#" class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> View all </a>-->
-<!--    </div>-->
   </div>
 </template>
 
 <script>
 import LocationForecast from './LocationForecast.vue';
-
-/*
-const fakeForecasts = [
-  {
-    name: 'Mont Carmel',
-    latitude: 12.1313,
-    longitude: 12.12313,
-    dayForecasts: [
-      {
-        dt: 1645527600,
-        icon: '01d',
-        aveTemp: 15,
-        minTemp: 10,
-        maxTemp: 22,
-        humidity: 30,
-        precipitation: 2,
-      },
-      {
-        dt: 1645527600,
-        icon: '02d',
-        aveTemp: 15,
-        minTemp: 10,
-        maxTemp: 22,
-        humidity: 30,
-        precipitation: 2,
-      },
-      {
-        dt: 1645527600,
-        icon: '02d',
-        aveTemp: 15,
-        minTemp: 10,
-        maxTemp: 22,
-        humidity: 30,
-        precipitation: 2,
-      },
-      {
-        dt: 1645527600,
-        icon: '02d',
-        aveTemp: 15,
-        minTemp: 10,
-        maxTemp: 22,
-        humidity: 30,
-        precipitation: 2,
-      },
-    ],
-  },
-];
- */
+import {useLocationsStore} from '@/stores/locations';
 
 export default {
   name: 'ForecastsDisplay',
   components: {LocationForecast},
-  // setup() {
-  //   return {
-  //     forecasts: [],
-  //   };
-  // },
+  setup() {
+  },
   data () {
     return {
       forecasts: [],
     }
   },
+  props: {
+    apiUrl: {
+      required: true,
+      type: String,
+    },
+  },
   async mounted() {
-    const apiUrl = 'http://0.0.0.0:8088';
+    // const locationsStore = useLocationsStore();
+
     const savedLocations = [
       {
         name: "Stoneham",
@@ -107,7 +61,7 @@ export default {
     ];
 
     for (const location of savedLocations) {
-      const response = await fetch(`${apiUrl}/forecast/${location.lat},${location.lon}`);
+      const response = await fetch(`${this.apiUrl}/forecast/${location.lat},${location.lon}`);
       const forecast = await response.json();
       forecast.name = location.name;
       forecast.country = location.country;

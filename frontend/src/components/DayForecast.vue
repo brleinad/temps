@@ -4,16 +4,6 @@
     <img class="flex-shrink-0 mx-auto rounded-full" :src="iconUrl" alt="" />
     <span class="text-slate-50 text-sm">{{ kelvin2Celsius(dayForecast.temp.day) }} &deg;</span>
   </div>
-<!--      <div>-->
-<!--        <div class="-mt-px flex divide-x divide-gray-200">-->
-<!--          <div class="w-0 flex-1 flex">-->
-<!--            <button @click="something" class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg rounded-br-lg hover:text-gray-500">-->
-<!--              <MailIcon class="w-5 h-5 text-gray-400" aria-hidden="true" />-->
-<!--              <span class="ml-3">details</span>-->
-<!--            </button>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
 </template>
 
 <script>
