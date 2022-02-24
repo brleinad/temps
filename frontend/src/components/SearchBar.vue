@@ -24,6 +24,7 @@
           :value="location"
           as="template"
           v-slot="{ active, selected }"
+          @click="addLocation(location)"
         >
           <li
             :class="[
@@ -52,6 +53,7 @@
 </template>
 
 <script>
+import { getSavedLocations } from '../helpers';
 import SearchIcon from "../assets/SearchIcon.svg?component";
 import {
   Combobox,
@@ -92,6 +94,12 @@ export default {
       }
       const response = await fetch(`${this.apiUrl}/locations/${locationName}`);
       this.foundLocations = await response.json();
+    },
+    addLocation(location) {
+      let savedLocations = getSavedLocations();
+      savedLocations.push(location);
+      localStorage.setItem('savedLocations', JSON.stringify(savedLocations));
+      // TODO: avoid duplicates
     },
   },
 };
