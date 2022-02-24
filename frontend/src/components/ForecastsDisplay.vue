@@ -12,7 +12,6 @@
 
 <script>
 import LocationForecast from './LocationForecast.vue';
-import {useLocationsStore} from '@/stores/locations';
 
 export default {
   name: 'ForecastsDisplay',
@@ -29,45 +28,28 @@ export default {
       required: true,
       type: String,
     },
+    savedLocations: {
+      type: Array,
+    }
   },
   async mounted() {
-    // const locationsStore = useLocationsStore();
-
-    const savedLocations = [
-      {
-        name: "Stoneham",
-        lat: 46.999607,
-        lon: -71.36948,
-        country: "CA",
-      },
-      {
-        name: "Chicoutimi",
-        lat: 48.428635,
-        lon: -71.06371,
-        country: "CA",
-      },
-      {
-        name: "Kamouraska",
-        lat: 47.566795,
-        lon: -69.86687,
-        country: "CA",
-      },
-      {
-        name: "Kamouraska",
-        lat: 47.566795,
-        lon: -69.86687,
-        country: "CA",
-      },
-    ];
-
-    for (const location of savedLocations) {
-      const response = await fetch(`${this.apiUrl}/forecast/${location.lat},${location.lon}`);
-      const forecast = await response.json();
-      forecast.name = location.name;
-      forecast.country = location.country;
-      this.forecasts.push(forecast);
-    };
-
+    // this.getForecasts(); not needed?
+  },
+  watch: {
+    savedLocations() {
+      this.getForecasts();
+    },
+  },
+  methods: {
+    async getForecasts() {
+      for (const location of this.savedLocations) {
+        const response = await fetch(`${this.apiUrl}/forecast/${location.lat},${location.lon}`);
+        const forecast = await response.json();
+        forecast.name = location.name;
+        forecast.country = location.country;
+        this.forecasts.push(forecast);
+      };
+    },
   },
 };
 </script>

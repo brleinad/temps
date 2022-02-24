@@ -100,6 +100,7 @@ export default {
       savedLocations.push(location);
       localStorage.setItem('savedLocations', JSON.stringify(savedLocations));
       // TODO: avoid duplicates
+      this.$emit('addedLocation');
     },
   },
 };

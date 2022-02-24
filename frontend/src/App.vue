@@ -5,13 +5,15 @@ import SearchBar from './components/SearchBar.vue';
 
 <template>
   <main class="bg-gray-900 h-vfull">
-    <SearchBar :apiUrl="apiUrl"/>
-    <ForecastDisplays :apiUrl="apiUrl"/>
+    <SearchBar :apiUrl="apiUrl" @addedLocation="handleNewLocation"/>
+    <ForecastDisplays :apiUrl="apiUrl" :savedLocations="savedLocations"/>
   </main>
 </template>
 
 
 <script>
+
+import { getSavedLocations } from './helpers';
 
 let apiUrl = 'http://0.0.0.0:8088';
 if (window.location.href.indexOf('temps') > -1) {
@@ -22,7 +24,16 @@ export default {
   data() {
     return {
       apiUrl,
+      savedLocations: [],
     }
   },
+  mounted() {
+    this.savedLocations = getSavedLocations();
+  },
+  methods: {
+    handleNewLocation() {
+      this.savedLocations= getSavedLocations();
+    }
+  }
 }
 </script>
