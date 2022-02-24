@@ -16,7 +16,8 @@
 <script>
 import LocationForecast from './LocationForecast.vue';
 
-const forecasts = [
+/*
+const fakeForecasts = [
   {
     name: 'Mont Carmel',
     latitude: 12.1313,
@@ -60,58 +61,53 @@ const forecasts = [
       },
     ],
   },
-  {
-    name: 'Kamou',
-    latitude: 12.1313,
-    longitude: 12.12313,
-    dayForecasts: [
-      {
-        dt: 1645527600,
-        icon: '03d',
-        aveTemp: 15,
-        minTemp: 10,
-        maxTemp: 22,
-        humidity: 30,
-        precipitation: 2,
-      },
-      {
-        dt: 1645527600,
-        icon: '03d',
-        aveTemp: 15,
-        minTemp: 10,
-        maxTemp: 22,
-        humidity: 30,
-        precipitation: 2,
-      },
-      {
-        dt: 1645527600,
-        icon: '04d',
-        aveTemp: 15,
-        minTemp: 10,
-        maxTemp: 22,
-        humidity: 30,
-        precipitation: 2,
-      },
-      {
-        dt: 1645527600,
-        icon: '03d',
-        aveTemp: 15,
-        minTemp: 10,
-        maxTemp: 22,
-        humidity: 30,
-        precipitation: 2,
-      },
-    ],
-  },
 ];
+ */
 
 export default {
   name: 'ForecastsDisplay',
   components: {LocationForecast},
-  setup() {
+  // setup() {
+  //   return {
+  //     forecasts: [],
+  //   };
+  // },
+  data () {
     return {
-      forecasts,
+      forecasts: [],
     }
+  },
+  async mounted() {
+    const apiUrl = 'http://0.0.0.0:8088';
+    const savedLocations = [
+      {
+        name: "Stoneham",
+        lat: 46.999607,
+        lon: -71.36948,
+        country: "CA",
+      },
+      {
+        name: "Chicoutimi",
+        lat: 48.428635,
+        lon: -71.06371,
+        country: "CA",
+      },
+      {
+        name: "Kamouraska",
+        lat: 47.566795,
+        lon: -69.86687,
+        country: "CA",
+      },
+    ];
+
+    for (const location of savedLocations) {
+      const response = await fetch(`${apiUrl}/forecast/${location.lat},${location.lon}`);
+      const forecast = await response.json();
+      forecast.name = location.name;
+      forecast.country = location.country;
+      this.forecasts.push(forecast);
+    };
+
   },
 };
 </script>

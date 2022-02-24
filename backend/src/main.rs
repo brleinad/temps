@@ -11,7 +11,8 @@ use services::*;
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         let cors = Cors::default()
-            .allowed_origin("https://www.temps-frontend.render.com")
+            .allowed_origin("https://www.temps.render.com")
+            .allowed_origin("http://localhost:3001")
             .allowed_methods(vec!["GET"])
             .allowed_headers(vec![header::AUTHORIZATION, header::ACCEPT])
             .allowed_header(header::CONTENT_TYPE)
