@@ -3,7 +3,7 @@
     <div class="flow-root p-6">
       <ul role="list" class="-my-5 divide-y divide-gray-200">
         <li v-for="locationForecast in forecasts" :key="locationForecast.name" class="py-4">
-          <LocationForecast :location="locationForecast"/>
+          <LocationForecast :location="locationForecast" @deleteLocation="$emit('deleteLocation', locationForecast)"/>
         </li>
       </ul>
     </div>
@@ -51,6 +51,9 @@ export default {
         this.forecasts.push(forecast);
       };
     },
+    emitDeleteLocation(location) {
+      this.$emit('deleteLocation', location);
+    }
   },
 };
 </script>

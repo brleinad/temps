@@ -6,7 +6,7 @@ import SearchBar from './components/SearchBar.vue';
 <template>
   <main class="bg-gray-900 h-vfull">
     <SearchBar :apiUrl="apiUrl" @addedLocation="handleNewLocation"/>
-    <ForecastDisplays :apiUrl="apiUrl" :savedLocations="savedLocations"/>
+    <ForecastDisplays :apiUrl="apiUrl" :savedLocations="savedLocations" @deleteLocation="deleteLocation"/>
   </main>
 </template>
 
@@ -34,7 +34,15 @@ export default {
     handleNewLocation() {
       this.savedLocations = getSavedLocations();
       console.log(this.savedLocations)
-    }
-  }
+    },
+    deleteLocation(deletedLocation) {
+      console.log(deletedLocation);
+      this.savedLocations = this.savedLocations.filter(
+        (location) =>
+          !(deletedLocation.lon === location.lon
+            && deletedLocation.lat === location.lat
+            && deletedLocation.name === location.name));
+    },
+  },
 }
 </script>
