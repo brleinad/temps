@@ -1,5 +1,5 @@
 <template>
-  <Combobox as="div" v-model="selectedLocation" class="p-6">
+  <Combobox as="div" v-model="selectedLocation" class="p-6 max-w-md">
     <ComboboxLabel class="block text-sm font-medium text-gray-100"
       ></ComboboxLabel
     >

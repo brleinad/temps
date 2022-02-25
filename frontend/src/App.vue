@@ -36,12 +36,11 @@ export default {
       console.log(this.savedLocations)
     },
     deleteLocation(deletedLocation) {
-      console.log(deletedLocation);
+      // TODO: avoid reloading everything on delete
       this.savedLocations = this.savedLocations.filter(
-        (location) =>
-          !(deletedLocation.lon === location.lon
-            && deletedLocation.lat === location.lat
-            && deletedLocation.name === location.name));
+        // TODO: make this more robust
+        (location) => !(deletedLocation.name === location.name && deletedLocation.country === location.country));
+      localStorage.setItem('savedLocations', JSON.stringify(this.savedLocations));
     },
   },
 }
