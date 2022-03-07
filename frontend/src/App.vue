@@ -29,6 +29,7 @@ export default {
   },
   mounted() {
     this.savedLocations = getSavedLocations();
+    fetch(`${this.apiUrl}/`); // wake up the backend
   },
   methods: {
     handleNewLocation() {
