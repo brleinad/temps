@@ -15,9 +15,9 @@ import SearchBar from './components/SearchBar.vue';
 
 import { getSavedLocations } from './helpers';
 
-let apiUrl = 'http://0.0.0.0:8088';
+let apiUrl = 'http://0.0.0.0:8080';
 if (window.location.href.indexOf('temps') > -1) {
-  apiUrl = 'https://temps-backend.onrender.com';
+  apiUrl = 'https://temps.fly.dev';
 }
 
 export default {
