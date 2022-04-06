@@ -1,5 +1,8 @@
 FROM liuchong/rustup:stable AS builder
 
+ARG OPEN_WEATHER_MAP_API_KEY
+ENV OPEN_WEATHER_MAP_API_KEY $OPEN_WEATHER_MAP_API_KEY
+
 # Make a fake Rust app to keep a cached layer of compiled crates
 RUN USER=root cargo new app
 WORKDIR /usr/src/app
@@ -11,8 +14,6 @@ RUN cargo build --release
 
 # Copy the rest
 COPY . .
-
-ENV OPEN_WEATHER_MAP_API_KEY ${OPEN_WEATHER_MAP_API_KEY}
 
 # Build (install) the actual binaries
 RUN cargo install --path .
