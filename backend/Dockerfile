@@ -29,6 +29,8 @@ WORKDIR /app
 # Get compiled binaries from builder's cargo install directory
 COPY --from=builder /root/.cargo/bin/ /app/
 
+EXPOSE 8080/tcp
+
 # No CMD or ENTRYPOINT, see fly.toml with `cmd` override.
 
 
