@@ -349,17 +349,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "backend"
-version = "0.1.0"
-dependencies = [
- "actix-cors",
- "actix-web",
- "reqwest",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "base-x"
 version = "0.2.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1757,6 +1746,17 @@ dependencies = [
  "redox_syscall",
  "remove_dir_all",
  "winapi 0.3.9",
+]
+
+[[package]]
+name = "temps"
+version = "0.1.0"
+dependencies = [
+ "actix-cors",
+ "actix-web",
+ "reqwest",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
